@@ -9,7 +9,7 @@ Let's start digging transaction!
 To get the latest version of `Consume` simply require it in your `composer.json` file.
 
 ~~~
-"teepluss/corebank": "dev-master"
+"teepluss/corebank": "0.0.*"
 ~~~
 
 You'll then need to run `composer install` to download it and have the autoloader updated.
