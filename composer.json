@@ -13,8 +13,10 @@
             "email": "admin@jquerytips.com"
         }
     ],
-    "psr-4": {
-        "Teepluss\\Corebank\\": "src/"
+    "autoload": {
+        "psr-4": {
+            "Teepluss\\Corebank\\": "src/"
+        }
     },
     "minimum-stability": "dev"
 }
