@@ -51,7 +51,7 @@ class Corebank
     public function api($method = 'GET', $path, array $data = [])
     {
         $method = strtoupper($method);
-        $path = rtrim($path, '/');
+        $path = ltrim($path, '/');
 
         $endpoint = $this->endpoint.'/'.$path;
 
