@@ -34,7 +34,7 @@ class Corebank
      */
     public function createTransactions($transactions)
     {
-        $response = $this->request('POST', '/transactions', [
+        $response = $this->api('POST', '/transactions', [
             'json' => $transactions
         ]);
 
@@ -48,7 +48,7 @@ class Corebank
         return $this;
     }
 
-    protected function request($method = 'GET', $path, array $data = [])
+    protected function api($method = 'GET', $path, array $data = [])
     {
         $method = strtoupper($method);
         $path = rtrim($path, '/');
