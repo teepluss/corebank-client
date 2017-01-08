@@ -1,0 +1,20 @@
+{
+    "name": "teepluss/corebank",
+    "description": "Corebank Client",
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": ">=5.1.0",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tee",
+            "email": "admin@jquerytips.com"
+        }
+    ],
+    "psr-4": {
+        "Teepluss\\Corebank\\": "src/"
+    },
+    "minimum-stability": "dev"
+}
