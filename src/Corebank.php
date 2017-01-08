@@ -48,7 +48,7 @@ class Corebank
         return $this;
     }
 
-    protected function api($method = 'GET', $path, array $data = [])
+    public function api($method = 'GET', $path, array $data = [])
     {
         $method = strtoupper($method);
         $path = rtrim($path, '/');
