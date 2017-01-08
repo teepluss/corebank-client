@@ -1,6 +1,6 @@
 <?php
 
-namespace Teepluss\Corebank\Corebank;
+namespace Teepluss\Corebank;
 
 use Closure;
 use GuzzleHttp;

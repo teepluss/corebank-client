@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Corebank;
+namespace Teepluss\Corebank;
 
 use Illuminate\Support\ServiceProvider;
 

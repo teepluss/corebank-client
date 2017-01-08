@@ -14,6 +14,6 @@ return [
     |
     */
 
-    'endpoint' => env('COREBANK_ENDPOINT', 'http://bangkokclick.com/api'),
+    'endpoint' => env('COREBANK_ENDPOINT', 'http://corebank.dev/api'),
 
 ];
