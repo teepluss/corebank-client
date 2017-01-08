@@ -4,7 +4,7 @@ Let's start digging transaction!
 
 ### Installation
 
-- [Consume on Bitbucket](https://bitbucket.org/teepluss/corebanking-sdk)
+- [Consume on Github](https://github.com/teepluss/corebank-client)
 
 To get the latest version of `Consume` simply require it in your `composer.json` file.
 
