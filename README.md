@@ -6,6 +6,17 @@ Let's start digging transaction!
 
 - [Consume on Github](https://github.com/teepluss/corebank-client)
 
+This project is the private repository, so you need to custom composer.json repositories.
+
+~~~
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/teepluss/corebank-client"
+    }
+],
+~~~
+
 To get the latest version of `Consume` simply require it in your `composer.json` file.
 
 ~~~
