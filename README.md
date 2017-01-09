@@ -48,20 +48,25 @@ Corebank also ships with a facade which provides the static syntax for creating 
 ## Usage
 
 ```php
+try {
+    $transactions = [];
 
-$transacctions = [
-    '....'
-];
+    $response = Corebank::api('POST', '/transactions', [
+        'user_id' => 2,
+        'account' => '1111111111',
+        'provider' => 'scb',
+        'transactions' => $transactions
+    ]);
 
-$response = Corebank::setTimeout(60)->createTransactions($transactions);
-$response->then(
-    function ($response) {
-        var_dump($response);
-    },
-    function ($response) {
-        var_dump($response);
+    echo $response->getBody();
+} catch (RequestException $e) {
+    dump($e->getCode()); // 422 is validate error.
+    if ($e->hasResponse()) {
+        $response = $e->getResponse();
+        $json = json_decode($response->getBody(), true);
+        dump($json);
     }
-);
+}
 ```
 
 ## Support or Contact

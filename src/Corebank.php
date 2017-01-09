@@ -15,8 +15,6 @@ class Corebank
 
     protected $timeout = 30;
 
-    protected $response = ['success', 'error'];
-
     public function __construct($config)
     {
         $this->client = new GuzzleHttp\Client();
@@ -32,14 +30,14 @@ class Corebank
      * @param  array $transactions
      * @return array
      */
-    public function createTransactions($transactions)
-    {
-        $response = $this->api('POST', '/transactions', [
-            'json' => $transactions
-        ]);
+    // public function createTransactions($transactions)
+    // {
+    //     $response = $this->api('POST', '/transactions', [
+    //         'json' => $transactions
+    //     ]);
 
-        return $response;
-    }
+    //     return $response;
+    // }
 
     public function setTimeout($timeout)
     {
@@ -48,7 +46,7 @@ class Corebank
         return $this;
     }
 
-    public function api($method = 'GET', $path, array $data = [])
+    public function api($method = 'GET', $path, array $formParams = [])
     {
         $method = strtoupper($method);
         $path = ltrim($path, '/');
@@ -57,36 +55,22 @@ class Corebank
 
         $parameters = [
             'headers' => [
-                'Content-Type' => 'application/json',
+                'Content-Type' => 'application/x-www-form-urlencoded',
                 'Accept' => 'application/json',
             ],
             'timeout' => $this->timeout
         ];
 
         if (in_array($method, ['POST', 'PUT', 'PATCH'])) {
+            $data = [
+                'form_params' => $formParams
+            ];
             $parameters = array_merge($parameters, $data);
+
         }
-
-        try {
-            $response = $this->client->request($method, $endpoint, $parameters);
-            $data = $response->getBody();
-            $this->response['success'] = json_decode($data, true);
-        } catch (RequestException $e) {
-            // echo Psr7\str($e->getRequest());
-            if ($e->hasResponse()) {
-                $data = $e->getResponse()->getBody();
-                $this->response['error'] = json_decode($data, true);
-            }
-        }
-
-        return $this;
-    }
-
-    function then(Closure $success, Closure $error)
-    {
-        $success(array_get($this->response, 'success'));
-        $error(array_get($this->response, 'error'));
-
-        return $this;
+        
+        $response = $this->client->request($method, $endpoint, $parameters);
+    
+        return $response;
     }
 }
