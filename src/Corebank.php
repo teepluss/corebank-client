@@ -139,10 +139,7 @@ class Corebank
         $headers = $this->headers;
 
         $parameters = [
-            'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded',
-                'Accept' => 'application/json',
-            ],
+            'headers' => $headers,
             'timeout' => $this->timeout
         ];
 
