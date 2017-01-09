@@ -136,9 +136,7 @@ class Corebank
         $path = ltrim($path, '/');
 
         $endpoint = $this->endpoint.'/'.$path;
-
         $headers = $this->headers;
-        dump($headers);
 
         $parameters = [
             'headers' => [
@@ -153,7 +151,6 @@ class Corebank
                 'form_params' => $formParams
             ];
             $parameters = array_merge($parameters, $data);
-
         }
         
         $response = $this->client->request($method, $endpoint, $parameters);
