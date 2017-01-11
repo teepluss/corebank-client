@@ -17,11 +17,25 @@ class Corebank
     protected $client;
 
     /**
-     * Api endpoint.
+     * The api endpoint.
      * 
      * @var string
      */
-    protected $endpoint;
+    protected $endpoint = 'http://codeinvader.com/api';
+
+    /**
+     * Endpoint to issue token.
+     * 
+     * @var string
+     */
+    protected $issueTokenEndpoint = 'http://codeinvader.com/oauth';
+
+    /**
+     * Api config.
+     * 
+     * @var string
+     */
+    protected $config;
 
     /**
      * Request timeout.
@@ -56,7 +70,14 @@ class Corebank
     {
         $this->client = new GuzzleHttp\Client();
 
-        $this->endpoint = $config['endpoint'];
+        if (! isset($config['endpoint']) && ! empty($config['endpoint'])) {
+            $this->endpoint = $config['endpoint'];
+        }
+
+        $parseUrl = parse_url($this->endpoint);
+        $this->issueTokenEndpoint = $parseUrl['scheme'].'://'.$parseUrl['host'].'/oauth';
+
+        $this->config = $config;
 
         return $this;
     }
@@ -120,6 +141,23 @@ class Corebank
         $this->setHeaders([$key => $value]);
 
         return $this;
+    }
+
+    public function requestGrantTypePasswordToken($username, $password)
+    {
+        $response = $this->client->request('POST', $this->issueTokenEndpoint.'/token', [
+            'form_params' => [
+                'client_id' => $this->config['app_id'],
+                'client_secret' => $this->config['secret'],
+                'grant_type' => 'password',
+                'username' => $username,
+                'password' => $password,
+            ]
+        ]);
+
+        $content = $response->getBody();
+        
+        return json_decode($content);
     }
 
     /**

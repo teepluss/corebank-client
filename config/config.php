@@ -14,6 +14,8 @@ return [
     |
     */
 
-    'endpoint' => env('COREBANK_ENDPOINT', 'http://corebank.dev/api'),
+    'endpoint' => env('COREBANK_ENDPOINT', 'http://codeinvader.com/api'),
+    'app_id' => env('COREBANK_APP_ID'),
+    'secret' => env('COREBANK_APP_SECRET', 'hrOdYuexejEE8XQWFqIoZgIV0bSF5jFcdSH0GGPb'),
 
 ];
