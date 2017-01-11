@@ -143,6 +143,13 @@ class Corebank
         return $this;
     }
 
+    /**
+     * Request token using username and password.
+     * 
+     * @param  string $username 
+     * @param  string $password 
+     * @return array           
+     */
     public function requestGrantTypePasswordToken($username, $password)
     {
         $response = $this->client->request('POST', $this->issueTokenEndpoint.'/token', [
