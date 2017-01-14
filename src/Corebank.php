@@ -11,49 +11,49 @@ class Corebank
 {
     /**
      * Guzzle client.
-     * 
+     *
      * @var \GuzzleHttp\Client
      */
     protected $client;
 
     /**
      * The api endpoint.
-     * 
+     *
      * @var string
      */
     protected $endpoint = 'http://codeinvader.com/api';
 
     /**
      * Endpoint to issue token.
-     * 
+     *
      * @var string
      */
     protected $issueTokenEndpoint = 'http://codeinvader.com/oauth';
 
     /**
      * Api config.
-     * 
+     *
      * @var string
      */
     protected $config;
 
     /**
      * Request timeout.
-     * 
+     *
      * @var integer
      */
     protected $timeout = 30;
 
     /**
      * Access token.
-     * 
+     *
      * @var string
      */
     protected $accessToken;
 
     /**
      * Request headers.
-     * 
+     *
      * @var array
      */
     protected $headers = [
@@ -63,14 +63,14 @@ class Corebank
 
     /**
      * Construct.
-     * 
-     * @param array $config 
+     *
+     * @param array $config
      */
     public function __construct($config)
     {
         $this->client = new GuzzleHttp\Client();
 
-        if (! isset($config['endpoint']) && ! empty($config['endpoint'])) {
+        if (isset($config['endpoint']) && ! empty($config['endpoint'])) {
             $this->endpoint = $config['endpoint'];
         }
 
@@ -98,7 +98,7 @@ class Corebank
 
     /**
      * Return access token.
-     * 
+     *
      * @return string
      */
     public function getAccessToken()
@@ -108,8 +108,8 @@ class Corebank
 
     /**
      * Set Timeput.
-     * 
-     * @param integer $timeout 
+     *
+     * @param integer $timeout
      */
     public function setTimeout($timeout)
     {
@@ -120,8 +120,8 @@ class Corebank
 
     /**
      * Set headers.
-     * 
-     * @param array $headers 
+     *
+     * @param array $headers
      */
     public function setHeaders($headers = [])
     {
@@ -132,11 +132,11 @@ class Corebank
 
     /**
      * Set a header.
-     * 
-     * @param string $key   
-     * @param stainr $value 
+     *
+     * @param string $key
+     * @param stainr $value
      */
-    public function setHeader($key, $value) 
+    public function setHeader($key, $value)
     {
         $this->setHeaders([$key => $value]);
 
@@ -145,10 +145,10 @@ class Corebank
 
     /**
      * Request token using username and password.
-     * 
-     * @param  string $username 
-     * @param  string $password 
-     * @return array           
+     *
+     * @param  string $username
+     * @param  string $password
+     * @return array
      */
     public function requestGrantTypePasswordToken($username, $password)
     {
@@ -163,17 +163,17 @@ class Corebank
         ]);
 
         $content = $response->getBody();
-        
+
         return json_decode($content);
     }
 
     /**
      * Make request.
-     * 
-     * @param  string $method     
-     * @param  string $path       
-     * @param  array  $formParams 
-     * @return \GuzzleHttp\Psr7\Response          
+     *
+     * @param  string $method
+     * @param  string $path
+     * @param  array  $formParams
+     * @return \GuzzleHttp\Psr7\Response
      */
     public function api($method = 'GET', $path, array $formParams = [])
     {
@@ -194,9 +194,9 @@ class Corebank
             ];
             $parameters = array_merge($parameters, $data);
         }
-        
+
         $response = $this->client->request($method, $endpoint, $parameters);
-    
+
         return $response;
     }
 }
